@@ -1,0 +1,53 @@
+.navbar {
+
+    background-image: linear-gradient(to bottom right, #db6300, rgb(244, 255, 50));
+    /* background-image: linear-gradient(to bottom right, rgb(244, 255, 50), #db6300); */
+
+    /* background-image: linear-gradient(to bottom right, hsl(192, 100%, 50%), rgb(2, 52, 145)); */
+
+    font-size: 16px;
+    font-weight: bolder;
+    color: white !important;
+    height: 28px;
+    font-family: 'Quicksand', sans-serif;
+    filter: drop-shadow(0px 4px 5px rgb(0, 0, 0));
+
+}
+
+brand-logo {
+    font-size: 20px !important;
+    font-weight: bolder;
+    color: yellow;
+    color: white !important;
+
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: 500 !important;
+    color: black !important;
+}
+
+.nav-item {
+    align-items: left;
+    font-size: 14px;
+    font-weight: 500 !important;
+    color: black;
+}
+
+.navbar-logo {
+    height: 30px;
+    width: 30px;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0)
+    ), url("../../src/logo_transparent.png");
+    /* "https://icdn2.digitaltrends.com/image/tradlose-hojttalere-1500x1000.jpg?ver=1" */
+    background-size:cover;
+}
+
+
+#statustext {
+    font-size: 17px;
+    color: yellow;
+}

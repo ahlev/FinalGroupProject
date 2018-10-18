@@ -1,0 +1,15 @@
+/*AL note - Style this modal (form?) like the instructions form from Matching game
+using axis +1 so it shades the background */
+
+.search-btn {
+    background-color: #FDCA40;
+    margin-top: 20px;
+}
+
+.form-label {
+    font-size: 20px;
+}
+
+.card-header {
+    margin-bottom: 30px;
+}

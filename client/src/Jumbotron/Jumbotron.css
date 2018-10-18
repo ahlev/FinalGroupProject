@@ -1,0 +1,79 @@
+/*https://coolors.co/080708-3772ff-df2935-fdca40-e6e8e6*/
+.jumbotron  {
+    /* background-color: #080708 !important; */
+    color: white !important;
+    border-bottom: 10px solid transparent;
+    border-image: linear-gradient(to bottom right, rgb(244, 255, 50), #db6300);
+    border-image-slice: 1;
+
+    /* linear-gradient(to bottom right, hsl(192, 100%, 70%), rgb(2, 52, 145)); */
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom: 15px;
+    background-image:
+     linear-gradient(
+        rgba(0, 0, 0, 0.71),
+        rgba(0, 0, 0, 0.71)
+      ),
+       url("../PartyUp_logo.jpg") !important;
+       background-size:cover;
+       background-position: -20px -30px;
+
+}
+
+
+h1 {
+    font-weight: 400 !important;
+}
+
+p {
+    margin-top: -15px;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+}
+
+.button {
+    background-color: #FDCA40 !important;
+    color: black;
+}
+
+body {
+    font-size: 2em;
+    font-family: sans-serif;
+  }
+  
+  .animation {
+    vertical-align: sub;
+    display: inline-block;
+    margin-top: -.1em;
+    margin-bottom: -.1em;
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    height: 1.2em;
+  }
+  
+  .animation-window {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  .animation-gray-list {
+    position: absolute;
+    color: lightgray;
+  }
+  
+  .animation ul {
+    position: relative;
+    list-style: none;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    transition: top 300ms;
+  }
+  
+  .animation li {
+    margin: 0 .2em;
+    text-align: center;
+  }

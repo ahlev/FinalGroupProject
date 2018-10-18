@@ -1,0 +1,151 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mainForm {
+  align-content: center;
+  text-align: center;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-control {
+  border: 1px grey;
+}
+
+.spotifylogin {
+  padding: 5px !important;
+  color: green !important;
+}
+
+.body-text {
+  margin: 0 auto;
+  text-align: center;
+}
+
+ul {
+  font-size: 18px;
+  /* font-weight: bold; */
+}
+
+h5 {
+  font-weight: bold;
+}
+
+p {
+  margin-top: 10px;
+}
+
+.Col{
+  margin: 0 auto;
+}
+
+body {
+  text-align: center;
+}
+
+h1 {
+  font-size: 74px !important;
+}
+
+.row {
+  margin-left: +15px;
+  margin-right: +15px;
+  margin-bottom: 20px;
+  font-family: 'Quicksand', sans-serif;
+  margin-bottom: 50px;
+  /* font-family: 'Arvo', serif; */
+font-family: 'EB Garamond', serif;
+}
+
+.action-panel {
+  padding: 15px;
+  border: 10px solid transparent;
+  border-image: linear-gradient(to bottom right, rgb(244, 255, 50), #db6300);
+  border-image-slice: 1;
+  margin-top: 20px;
+  filter: drop-shadow(0px 22px 24px #333);
+  background-color: white;
+  font-weight: 600;
+  margin-left: 3%;
+
+  
+}
+
+.info-panel {
+  padding: 20px;
+  border: 0px solid transparent;
+  border-image: linear-gradient(to bottom right, rgb(250, 255, 177), rgb(228, 130, 38));
+  border-image-slice: 1;
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0.52),
+    rgba(0, 0, 0, 0.52)
+  ), url("https://www.fluidnetwork.co.uk/gfx/venues/19170/big_chill_bar_kings_cross_london_roof_terrace_1.jpg");
+  /* "https://icdn2.digitaltrends.com/image/tradlose-hojttalere-1500x1000.jpg?ver=1" */
+  background-size:cover;
+  filter: drop-shadow(0px 12px 10px #333);
+  color: white;
+  margin-top: 20px;
+  font-weight: 900;
+  padding-bottom: 80px;
+}
+
+.col-md-1 {
+  margin: -3%;
+}
+
+
+
+.logo-transparent {
+  height: 50px;
+  width: 50px;
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0)
+  ), url("../src/logo_transparent.png");
+  /* "https://icdn2.digitaltrends.com/image/tradlose-hojttalere-1500x1000.jpg?ver=1" */
+  background-size:cover;
+  margin: 0 auto;
+
+}
+
+.form-brand-name {
+  margin-top: -5px;
+  font-size: 17px !important;
+  color: #9c9c9c;
+  font-weight: 500 !important;
+}
+
+
+
+
+

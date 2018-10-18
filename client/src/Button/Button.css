@@ -1,0 +1,33 @@
+.btn {
+    /* background-color: green !important; */
+    height: 90px;
+    width: 220px;
+    padding: 20px;
+    font-size: 20px;
+    align-items: center;
+    border-radius: 8px;
+    transition: 100ms ease-in-out;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder;
+    margin: 0 auto;
+    
+    background-image: linear-gradient(to bottom right, #43f815, #0c94ca);
+    filter: drop-shadow(00px 5px 8px #333);
+    margin: 8px;
+}
+
+
+
+.btn:hover {
+    transform: scale(1.06) ;
+
+    background-image: linear-gradient(to bottom right, hsl(194, 100%, 75%), 
+    hsl(212, 93%, 48%));
+
+    }
+
+.btn:active {
+    box-shadow: 0 3px 0 #000000;
+    top: 3px;
+    bottom: 3px;
+}
