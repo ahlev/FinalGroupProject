@@ -5,6 +5,7 @@ import HomePage from "./Pages/HomePage";
 // import Room from "./Pages/Room";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PageNotFound from "./Pages/PageNotFound";
 
 // // Still need to import API (?)
 
@@ -30,6 +31,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={HomePage} />
               {/* <Route exact path="/Room" component={Room} /> */}
+              <Route component={PageNotFound} />
             </Switch>
 
             <Footer />
