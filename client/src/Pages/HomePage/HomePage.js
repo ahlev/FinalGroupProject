@@ -94,6 +94,12 @@ class HomePage extends Component {
                   </div>
                   <br />
                 </form>
+
+                {/* This a href is being used in dev mode to redirect to the auth-server for Spotify login *** */}
+                {/* Basically, it redirects to that other app (server) and then should bounce back to the react app with an access key */}
+                <a href="http://localhost:8888">
+                <Button >Start with Spotify</Button>
+                </a>
               </Modal>
             </Row>
           </Container>

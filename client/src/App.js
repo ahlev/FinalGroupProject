@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import HomePage from "./Pages/HomePage";
-// import Room from "./Pages/Room";
+import Room from "./Pages/Room";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PageNotFound from "./Pages/PageNotFound";
@@ -30,7 +30,7 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route exact path="/" component={HomePage} />
-              {/* <Route exact path="/Room" component={Room} /> */}
+              <Route exact path="/Room" component={Room} />
               <Route component={PageNotFound} />
             </Switch>
 
