@@ -1,3 +1,15 @@
 .save-btn {
     margin-left: 20px;
 }
+
+h8 {
+    size: 10px !important;
+}
+
+.option-button {
+    height: 50px
+}
+
+.option-button:hover {
+    background-color:  #a7ffa7;
+}
