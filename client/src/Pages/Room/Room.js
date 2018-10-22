@@ -4,6 +4,10 @@ import SongChoices from '../../SongChoices';
 import ChatBox from '../../ChatBox';
 import Container from '../../Container';
 import Spotify from 'spotify-web-api-js';
+import Col from '../../Col';
+import OptionsPanel from '../../OptionsPanel';
+import NowPlaying from '../../NowPlaying';
+import Button from '../../Button';
 
 const spotifyWebApi = new Spotify();
 
@@ -13,8 +17,13 @@ class Room extends Component {
         const params = this.getHashParams();
         this.state = {
             loggedIn: params.access_token ? true : false,
+
+            userPlaylists: [],
+            activePlaylist: [],
+            voteOptions: [],
+
             nowPlaying: {
-                name: 'Not Checked',
+                name: '',
                 image: ''
             }
         }
@@ -48,30 +57,83 @@ class Room extends Component {
     getUserPlaylists() {
         spotifyWebApi.getUserPlaylists()
             .then((response) =>{
-                console.log("Playlists: ", JSON.stringify(response))
+                this.setState({
+                    userPlaylists: response.items
+                    }
+                )
+                console.log("State userPlaylists: ", (this.state.userPlaylists))
+                // console.log("SET TO STATE: ",this.setState.userPlaylists);
             })
+    }
+
+    // USE THE ID ON THE MAPPED SONGCHOICES... WHEN ONE IS CLICKED, GET ITS SONGS
+    // getPlaylistSongs(id) {
+
+    //     .then((response) => {
+    //         this.setState({
+    //             chosenPlaylistSongs: response.items
+    //         })
+    //     })
+    // }
+
+    setActive() {
+        console.log("Clicked on playlist")
+        // this.setState({
+        //     activePlaylist: this.state.activePlaylist.id;
+        // })
+        
     }
 
     render() {
         return (
             <div>
+                <Button onClick={() => this.getUserPlaylists() + this.getNowPlaying()}>
+                    Check My Music
+                </Button>
+
+                <NowPlaying 
+                    name= {this.state.nowPlaying.name}
+                    src= {this.state.nowPlaying.image}
+                    style={{width:100}} 
+                    />
+            
                 <Container className="body-container" fluid="true" style={{ marginTop: 10 }}>
                     <Row>
-                    <SongChoices />
+                        <OptionsPanel size="md-12" name="Pick Your Master Playlist">
+                            {this.state.userPlaylists.map(playlist => {
+                                return(
+                                    <SongChoices
+                                        key = {playlist.id}
+                                        name = {playlist.name}
+                                        setActive = {this.setActive}
+                                        id = {playlist.id}
+                                        onClick={this.getPlaylistSongs}
+                                        // image = {playlist.images[2].url}
+                                        >
+                                            </SongChoices>
+                                        );
+                                    })
+                                }
+                            </OptionsPanel>
+
+                            <OptionsPanel size="md-12" name="VOTE FOR THE NEXT SONG">
+                            {this.state.activePlaylist.map(song => {
+                                return(
+                                    <SongChoices
+                                        key = {song.id}
+                                        name = {song.name}
+                                        id = {song.id}
+                                        image = {song.images[2].url}
+                                        >
+                                     </SongChoices>
+                                        );
+                                    })
+                                }
+                            </OptionsPanel>
+
                     <ChatBox />
                     </Row>
                 </Container>
-
-                {/* TEST RENDERS using song name + image */}
-                <div>Now Playing: { this.state.nowPlaying.name } </div>
-
-                <div>
-                    <img src={ this.state.nowPlaying.image } style={{width:100}} />
-                </div>
-
-                <button onClick={() => this.getUserPlaylists() + this.getNowPlaying()}>
-                    Check Now Playing
-                </button>
 
             </div>
                 
