@@ -87,7 +87,10 @@ class Room extends Component {
     render() {
         return (
             <div>
-                <Button onClick={() => this.getUserPlaylists() + this.getNowPlaying()}>
+                <Button onClick={() => 
+                    this.getUserPlaylists() + 
+                    this.getNowPlaying()
+                    }>
                     Check My Music
                 </Button>
 
