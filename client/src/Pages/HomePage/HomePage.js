@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Container from "../../Container";
-import Row from "../../Row";
-import Col from "../../Col";
-import Button from "../../Button";
+import Container from "../../Components/Container";
+import Row from "../../Components/Row";
+import Col from "../../Components/Col";
+import Button from "../../Components/Button";
 import Modal from "react-responsive-modal";
-import Jumbotron from "../../Jumbotron";
+import Jumbotron from "../../Components/Jumbotron";
 
 class HomePage extends Component {
   state = {
@@ -98,7 +98,7 @@ class HomePage extends Component {
                 {/* This a href is being used in dev mode to redirect to the auth-server for Spotify login *** */}
                 {/* Basically, it redirects to that other app (server) and then should bounce back to the react app with an access key */}
                 <a href="http://localhost:8888">
-                <Button >Start with Spotify</Button>
+                  <Button>Start with Spotify</Button>
                 </a>
               </Modal>
             </Row>

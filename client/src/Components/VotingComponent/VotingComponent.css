@@ -1,0 +1,9 @@
+.save-btn {
+    margin-left: 20px;
+}
+
+.options-panel {
+    border: solid 2px black;
+    height: 50vh;
+    overflow: scroll;
+}

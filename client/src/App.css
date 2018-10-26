@@ -65,7 +65,7 @@ p {
   margin-top: 10px;
 }
 
-.Col{
+.Col {
   margin: 0 auto;
 }
 
@@ -81,10 +81,10 @@ h1 {
   margin-left: +15px;
   margin-right: +15px;
   margin-bottom: 20px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   margin-bottom: 50px;
   /* font-family: 'Arvo', serif; */
-font-family: 'EB Garamond', serif;
+  font-family: "EB Garamond", serif;
 }
 
 .action-panel {
@@ -97,21 +97,21 @@ font-family: 'EB Garamond', serif;
   background-color: white;
   font-weight: 600;
   margin-left: 3%;
-
-  
 }
 
 .info-panel {
   padding: 20px;
   border: 0px solid transparent;
-  border-image: linear-gradient(to bottom right, rgb(250, 255, 177), rgb(228, 130, 38));
+  border-image: linear-gradient(
+    to bottom right,
+    rgb(250, 255, 177),
+    rgb(228, 130, 38)
+  );
   border-image-slice: 1;
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0.52),
-    rgba(0, 0, 0, 0.52)
-  ), url("https://www.fluidnetwork.co.uk/gfx/venues/19170/big_chill_bar_kings_cross_london_roof_terrace_1.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)),
+    url("https://www.fluidnetwork.co.uk/gfx/venues/19170/big_chill_bar_kings_cross_london_roof_terrace_1.jpg");
   /* "https://icdn2.digitaltrends.com/image/tradlose-hojttalere-1500x1000.jpg?ver=1" */
-  background-size:cover;
+  background-size: cover;
   filter: drop-shadow(0px 12px 10px #333);
   color: white;
   margin-top: 20px;
@@ -123,19 +123,14 @@ font-family: 'EB Garamond', serif;
   margin: -3%;
 }
 
-
-
 .logo-transparent {
   height: 50px;
   width: 50px;
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0)
-  ), url("../src/logo_transparent.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+    url("../src/images/logo_transparent.png");
   /* "https://icdn2.digitaltrends.com/image/tradlose-hojttalere-1500x1000.jpg?ver=1" */
-  background-size:cover;
+  background-size: cover;
   margin: 0 auto;
-
 }
 
 .form-brand-name {
@@ -144,8 +139,3 @@ font-family: 'EB Garamond', serif;
   color: #9c9c9c;
   font-weight: 500 !important;
 }
-
-
-
-
-
