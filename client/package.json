@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "concurrently": "^4.0.1",
     "gh-pages": "^2.0.1",
     "mdbootstrap": "^4.5.12",
@@ -13,6 +14,8 @@
     "react-scripts": "2.0.4",
     "react-text-loop": "^1.1.0",
     "reactstrap": "^6.5.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
     "spotify-web-api-js": "^0.22.1"
   },
   "scripts": {
