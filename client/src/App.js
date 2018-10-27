@@ -22,6 +22,10 @@ class App extends Component {
     this.setState({ open: false });
   };
 
+  onInputChange = (event) => {
+    this.setState({input: event.target.value});
+  }
+
   render() {
     return (
       <div>

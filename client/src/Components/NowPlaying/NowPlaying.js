@@ -11,7 +11,7 @@ const NowPlaying = props => {
         <br />
         {props.name}
       </h5>
-      <img src={props.src} style={{ width: 100 }} alt="now playing img" />
+      <img src={props.src} style={{ width: 150 }} />
     </div>
   );
 };

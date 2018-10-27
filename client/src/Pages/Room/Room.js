@@ -8,6 +8,8 @@ import NowPlaying from "../../Components/NowPlaying";
 import Button from "../../Components/Button";
 import ChatBox from "../../Components/ChatBox";
 
+// import API from "../../Utils"
+
 const spotifyWebApi = new Spotify();
 
 class Room extends Component {
@@ -23,9 +25,15 @@ class Room extends Component {
 
       nowPlaying: {
         name: "",
-        image: ""
+        image: ''
+      },
+
+      user: {
+        spotify_id: '',
+        db_id: ''
       }
     };
+
     if (params.access_token) {
       spotifyWebApi.setAccessToken(params.access_token);
     }
@@ -56,13 +64,26 @@ class Room extends Component {
   getUserPlaylists() {
     spotifyWebApi.getUserPlaylists().then(response => {
       this.setState({
-        userPlaylists: response.items
+        userPlaylists: response.items,
       });
-      console.log("State userPlaylists: ", this.state.userPlaylists);
       // console.log("SET TO STATE: ",this.setState.userPlaylists);
     });
+    console.log(this.state)
   }
 
+
+  setActiveUser() {
+    // Get the authenticated user
+      spotifyWebApi.getMe().then(response => {
+        this.setState({
+          user: {
+            spotify_id: response.id
+          }
+        })
+      }, function(err) {
+        console.log('Something went wrong!', err);
+      });
+  }
   // USE THE ID ON THE MAPPED SONGCHOICES... WHEN ONE IS CLICKED, GET ITS SONGS
   // getPlaylistSongs(id) {
 
@@ -73,39 +94,61 @@ class Room extends Component {
   //     })
   // }
 
-  setActive() {
+  setActivePlaylist() {
     console.log("Clicked on playlist");
-    // this.setState({
-    //     activePlaylist: this.state.activePlaylist.id;
-    // })
+    // using playlist ID, get songs, pick a random song, start playback
+    // AND populate 5 random options into middle container as voting divs
+
   }
+
+
+
+// Mongo struggles starting here
+
+  componentDidMount() {
+    this.getUserPlaylists();
+    this.setActiveUser();
+    this.getNowPlaying();
+    // this.loadRoomHistory(); *** DB
+  }
+
+  // loadRoomHistory = (id) => {
+  //   API.getUser(spotify_id)
+    // if spotify_id and access_token = true
+    // then get "rooms" array from user document where spotify_id = this.state.spotify_id
+  
+
+
 
   render() {
     return (
       <div>
-        <Button onClick={() => this.getUserPlaylists() + this.getNowPlaying()}>
-          Check My Music
-        </Button>
+      
 
         <NowPlaying
           name={this.state.nowPlaying.name}
           src={this.state.nowPlaying.image}
-          style={{ width: 100 }}
+          style={{ width: 50 }}
         />
+
+          <Button onClick={() => this.getUserPlaylists() + this.setActiveUser()} className="api-check-btn">
+          Check My Music
+        </Button>
 
         <Container
           className="body-container"
           fluid="true"
-          style={{ marginTop: 10 }}
+          style={{ marginTop: 20 }}
         >
           <Row>
             <OptionsPanel size="md-12" name="Pick Your Master Playlist">
               {this.state.userPlaylists.map(playlist => {
                 return (
+                  
                   <SongChoices
                     key={playlist.id}
                     name={playlist.name}
-                    setActive={this.setActive}
+                    setActive={this.setActivePlaylist}
                     id={playlist.id}
                     onClick={this.getPlaylistSongs}
                     // image = {playlist.images[2].url}
