@@ -79,17 +79,9 @@ class HomePage extends Component {
                       type="text"
                       className="form-control"
                       id="room-name"
-                      aria-describedby="emailHelp"
+                      aria-describedby="room-name"
                       placeholder="Name your room"
                       required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="room-password"
-                      placeholder="Room password (optional)"
                     />
                   </div>
                   <br />
