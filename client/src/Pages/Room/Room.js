@@ -6,7 +6,7 @@ import Spotify from "spotify-web-api-js";
 import OptionsPanel from "../../Components/OptionsPanel";
 import NowPlaying from "../../Components/NowPlaying";
 import Button from "../../Components/Button";
-import ChatBox from "../../Components/ChatBox";
+import axios from "axios";
 
 // import API from "../../Utils"
 
@@ -31,7 +31,9 @@ class Room extends Component {
       user: {
         spotify_id: '',
         db_id: ''
-      }
+      },
+
+      sessionID: ''
     };
 
     if (params.access_token) {
@@ -64,8 +66,13 @@ class Room extends Component {
   getUserPlaylists() {
     spotifyWebApi.getUserPlaylists().then(response => {
       this.setState({
-        userPlaylists: response.items,
+        userPlaylists: response.items
+        // user: {
+        //   spotify_id : response.spotify_id //this may not exactly be coming from the response or be the right name
+        // }
       });
+
+      //TODO: in this function we are gonna set the state of state.
       // console.log("SET TO STATE: ",this.setState.userPlaylists);
     });
     console.log(this.state)
@@ -100,8 +107,22 @@ class Room extends Component {
     // AND populate 5 random options into middle container as voting divs
 
   }
-
-
+   //call this on a button click and attach an input field for the session name to it
+   //sessionInfo is coming from the form
+   createNewSession() {
+       return axios.post('/session', {
+         spotify_id: this.state.user.spotify_id,
+         name: this.state.sessionName,
+         current_playlist_id : "" 
+       }).then( (response, err) => {
+         if (err)
+            console.log(err)
+         else {
+           this.state.sessionID = response.sessionID;
+           //this.getUserPlaylists();
+         }
+       })
+   }
 
 // Mongo struggles starting here
 
@@ -170,7 +191,7 @@ class Room extends Component {
               })}
             </OptionsPanel>
 
-            <ChatBox />
+          
           </Row>
         </Container>
       </div>
