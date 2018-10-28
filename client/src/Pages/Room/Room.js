@@ -18,6 +18,7 @@ class Room extends Component {
     const params = this.getHashParams();
     this.state = {
       loggedIn: params.access_token ? true : false,
+      sessionName: '',
 
       userPlaylists: [],
       activePlaylist: [],
@@ -32,8 +33,6 @@ class Room extends Component {
         spotify_id: '',
         db_id: ''
       },
-
-      sessionID: ''
     };
 
     if (params.access_token) {
@@ -110,19 +109,23 @@ class Room extends Component {
    //call this on a button click and attach an input field for the session name to it
    //sessionInfo is coming from the form
    createNewSession() {
-       return axios.post('/session', {
-         spotify_id: this.state.user.spotify_id,
-         name: this.state.sessionName,
-         current_playlist_id : "" 
-       }).then( (response, err) => {
-         if (err)
-            console.log(err)
-         else {
-           this.state.sessionID = response.sessionID;
-           //this.getUserPlaylists();
-         }
-       })
-   }
+    return axios.post('/session', {
+      spotify_id: this.state.user.spotify_id,
+      sessionName: this.state.sessionName,
+      current_playlist_id : "" 
+    })
+    .then( response => {
+     //  if (err) {
+     //     console.log(err)
+     //  }else {
+        this.setState({
+          sessionName : response.sessionName
+        })
+        console.log("response: ", response)
+        //this.getUserPlaylists();
+     //  }
+    }).catch(err => console.log("from room.js...", err)) //FIRING AHHHHHH
+}
 
 // Mongo struggles starting here
 
@@ -152,7 +155,7 @@ class Room extends Component {
           style={{ width: 50 }}
         />
 
-          <Button onClick={() => this.getUserPlaylists() + this.setActiveUser()} className="api-check-btn">
+          <Button onClick={() => this.createNewSession() + this.getUserPlaylists() + this.setActiveUser()} className="api-check-btn">
           Check My Music
         </Button>
 
