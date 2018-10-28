@@ -8,6 +8,8 @@ import NowPlaying from "../../Components/NowPlaying";
 import Button from "../../Components/Button";
 import axios from "axios";
 
+
+
 // import API from "../../Utils"
 
 const spotifyWebApi = new Spotify();
@@ -16,13 +18,15 @@ class Room extends Component {
   constructor() {
     super();
     const params = this.getHashParams();
+
     this.state = {
       loggedIn: params.access_token ? true : false,
+      sessionName: '',
 
       userPlaylists: [],
       activePlaylist: [],
       voteOptions: [],
-
+      sessionName: 'test',
       nowPlaying: {
         name: "",
         image: ''
@@ -32,8 +36,6 @@ class Room extends Component {
         spotify_id: '',
         db_id: ''
       },
-
-      sessionID: ''
     };
 
     if (params.access_token) {
@@ -54,12 +56,12 @@ class Room extends Component {
 
   getNowPlaying() {
     spotifyWebApi.getMyCurrentPlaybackState().then(response => {
-      this.setState({
-        nowPlaying: {
-          name: response.item.name,
-          image: response.item.album.images[0].url
-        }
-      });
+      // this.setState({
+      //   nowPlaying: {
+      //     name: response.item.name,
+      //     image: response.item.album.images[0].url
+      //   }
+      // });
     });
   }
 
@@ -78,22 +80,24 @@ class Room extends Component {
     console.log(this.state)
   }
 
-
+  
   setActiveUser() {
     // Get the authenticated user
-      spotifyWebApi.getMe().then(response => {
+      spotifyWebApi.getMe()
+      .then(response => {
         this.setState({
           user: {
             spotify_id: response.id
           }
         })
+        console.log("this is the user on state: ", this.state.user)
       }, function(err) {
         console.log('Something went wrong!', err);
       });
   }
+
   // USE THE ID ON THE MAPPED SONGCHOICES... WHEN ONE IS CLICKED, GET ITS SONGS
   // getPlaylistSongs(id) {
-
   //     .then((response) => {
   //         this.setState({
   //             chosenPlaylistSongs: response.items
@@ -112,17 +116,22 @@ class Room extends Component {
    createNewSession() {
        return axios.post('/session', {
          spotify_id: this.state.user.spotify_id,
-         name: this.state.sessionName,
+         sessionName: this.state.sessionName,
          current_playlist_id : "" 
-       }).then( (response, err) => {
-         if (err)
-            console.log(err)
-         else {
-           this.state.sessionID = response.sessionID;
-           //this.getUserPlaylists();
-         }
        })
+       .then( response => {
+        //  if (err) {
+        //     console.log(err)
+        //  }else {
+           this.setState({
+             sessionName : response.sessionName
+           })
+           console.log("response: ", response)
+           //this.getUserPlaylists();
+        //  }
+       }).catch(err => console.log("from room.js...", err)) //FIRING AHHHHHH
    }
+
 
 // Mongo struggles starting here
 
@@ -140,19 +149,17 @@ class Room extends Component {
   
 
 
-
   render() {
     return (
       <div>
       
-
         <NowPlaying
           name={this.state.nowPlaying.name}
           src={this.state.nowPlaying.image}
           style={{ width: 50 }}
         />
 
-          <Button onClick={() => this.getUserPlaylists() + this.setActiveUser()} className="api-check-btn">
+          <Button onClick={() => this.getUserPlaylists() + this.setActiveUser() + this.createNewSession()} className="api-check-btn">
           Check My Music
         </Button>
 

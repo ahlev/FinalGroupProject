@@ -5,6 +5,27 @@ import Col from "../../Components/Col";
 import Button from "../../Components/Button";
 import Modal from "react-responsive-modal";
 import Jumbotron from "../../Components/Jumbotron";
+import axios from 'axios';
+import querystring from 'querystring';
+var generateRandomString = function(length) {
+  var text = '';
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (var i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
+var state = generateRandomString(16);
+var client_id = 'a8860cd039fd43b9809a7bca7c35fa54';
+var scope = 'user-read-private user-read-email user-read-playback-state user-read-currently-playing playlist-read-collaborative playlist-modify-public streaming';
+const stringUrl = querystring.stringify({
+  response_type: 'code',
+  client_id: client_id,
+  scope: scope,
+  redirect_uri: "https://localhost:3000/room",
+  state: state
+})
 
 class HomePage extends Component {
   state = {
@@ -18,6 +39,14 @@ class HomePage extends Component {
   onCloseModal = () => {
     this.setState({ open: false });
   };
+
+  loginGetRequest = () => {
+    console.log("This button works")
+    axios.get('/login', () => {
+      console.log("Doing its thing")
+    }
+    )
+  }
 
   render() {
     const { open } = this.state;
@@ -89,9 +118,9 @@ class HomePage extends Component {
 
                 {/* This a href is being used in dev mode to redirect to the auth-server for Spotify login *** */}
                 {/* Basically, it redirects to that other app (server) and then should bounce back to the react app with an access key */}
-                <a href="http://localhost:8888">
-                  <Button>Start with Spotify</Button>
-                </a>
+              
+                  <Button onClick={this.loginGetRequest}>Start with Spotify</Button>
+              
               </Modal>
             </Row>
           </Container>

@@ -6,6 +6,7 @@ import Room from "./Pages/Room";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PageNotFound from "./Pages/PageNotFound";
+import Callback from "./Pages/Callback";
 
 // // Still need to import API (?)
 
@@ -33,6 +34,7 @@ class App extends Component {
           <div>
             <Navbar />
             <Switch>
+            <Route exact path="/callback" component={Callback} />
               <Route exact path="/" component={HomePage} />
               <Route exact path="/Room" component={Room} />
               <Route component={PageNotFound} />
