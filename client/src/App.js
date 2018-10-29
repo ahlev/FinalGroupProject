@@ -24,9 +24,9 @@ class App extends Component {
   };
 
   onInputChange = (event) => {
-    this.preventDefault();
+    // this.preventDefault();
     this.setState({sessionName: event.target.value});
-    console.log(this.state.sessionName)
+    // console.log(this.state.sessionName)
   }
   
 

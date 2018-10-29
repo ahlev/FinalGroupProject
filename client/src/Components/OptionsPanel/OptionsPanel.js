@@ -9,7 +9,7 @@ const OptionsPanel = props => {
     .join(" ");
 
   return (
-    <Col size="md-4">
+    <Col size="md-6">
       <div className="options-panel">
         <h5>{props.name}</h5>
         <div className={size + "options-panel"} {...props} />

@@ -117,9 +117,13 @@ class Room extends Component {
     // then use that id to query the tracks on the playlist
      // THEN 
   setActivePlaylistDetails() {
-    console.log("Clicked on playlist");
     var activePlaylist = this.state.activePlaylist;
     const spotify_id = this.state.spotify_id;
+
+    console.log("Clicked on playlist")
+    // WRITE CODE TO START THIS PLAYLIST PLAYBACK (RANDOM?)
+    
+    // spotifyWebApi.play(activePlaylist).then(
 
     spotifyWebApi.getPlaylistTracks(spotify_id, activePlaylist).then(response => {
       this.setState({
