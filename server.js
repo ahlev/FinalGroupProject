@@ -14,7 +14,7 @@ mongoose.connect(MONGODB_URI);
 
 
 // =============================== ROUTES ======================================
-
+// app.get('*', middleware);
 // 1) Create a Session (mongo entry) when we launch a room (POST)
 app.post('/session', (req, res) => {
   console.log('this is working');
@@ -22,7 +22,7 @@ app.post('/session', (req, res) => {
   var session = {
     spotify_id: req.body.spotify_id, // spotify_id is on state ...
     sessionName: req.body.sessionName, // this will be a form field that isn't yet active
-    current_playlist: '' // this will be the ID of the playlist once clicked on
+    current_playlist_id: '' // this will be the ID of the playlist once clicked on
   };
 
   dbase.Session.create(session) // use the variable defined above to create a new Session

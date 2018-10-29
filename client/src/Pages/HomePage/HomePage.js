@@ -65,7 +65,7 @@ class HomePage extends Component {
             </Row>
 
             <Row>
-              <Modal open={open} onClose={this.onCloseModal} center>
+              <Modal open={open} onClose={this.onInputChange} center>
                 {/* Try to make this a component. It uses react-responsive-modal */}
                 <br />
                 <h5>Create your room</h5>
@@ -76,6 +76,7 @@ class HomePage extends Component {
                   {/* *** this form should be component*/}
                   <div className="form-group">
                     <input
+                      onChange={this.handleInputChange}
                       type="text"
                       className="form-control"
                       id="room-name"

@@ -11,7 +11,8 @@ import PageNotFound from "./Pages/PageNotFound";
 
 class App extends Component {
   state = {
-    open: false
+    open: false,
+    sessionName: ''
   };
 
   onOpenModal = () => {
@@ -23,8 +24,18 @@ class App extends Component {
   };
 
   onInputChange = (event) => {
-    this.setState({input: event.target.value});
+    this.preventDefault();
+    this.setState({sessionName: event.target.value});
+    console.log(this.state.sessionName)
   }
+  
+
+  // handleInputChange = (event) => {
+  //   // Using object destructuring to create two variables (off of our event), then set the state dynamically based on those values
+  //   const {name, value} = event.target;
+  //   this.setState({[name]:value});
+  // };
+
 
   render() {
     return (

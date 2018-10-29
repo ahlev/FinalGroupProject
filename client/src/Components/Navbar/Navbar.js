@@ -11,7 +11,7 @@ const Navbar = props => {
         SoundUp
       </a>
       <ul>
-        <li className="nav-item">Login</li>
+        <li className="nav-item"></li>
       </ul>
     </nav>
   );

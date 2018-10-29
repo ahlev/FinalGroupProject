@@ -6,11 +6,11 @@ const NowPlaying = props => {
 
   return (
     <div className="now-playing">
-      <h5>
-        Now Playing:
+      <h6>
+       Currently Playing:
         <br />
-        {props.name}
-      </h5>
+        {props.name} by {props.artist}
+      </h6>
       <img src={props.src} style={{ width: 150 }} />
     </div>
   );
