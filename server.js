@@ -13,36 +13,47 @@ var dbase = require('./models');
 mongoose.connect(MONGODB_URI);
 
 
-// Create a session when we launch a room (POST)
-// ADMIN uses this
-app.post('/session', (req, res, next) => {
+// =============================== ROUTES ======================================
+// app.get('*', middleware);
+// 1) Create a Session (mongo entry) when we launch a room (POST)
+app.post('/session', (req, res) => {
+  console.log('this is working');
     
   var session = {
-    admin_id: req.body.spotify_id, // spotify_id is on state ...
-    name: req.body.sessionName,
-    current_playlist: ''
+    spotify_id: req.body.spotify_id, // spotify_id is on state ...
+    sessionName: req.body.sessionName, // this will be a form field that isn't yet active
+    current_playlist_id: '' // this will be the ID of the playlist once clicked on
   };
 
-  dbase.Session.create(session);
-   res.send('session document added successfully');
+  dbase.Session.create(session) // use the variable defined above to create a new Session
+  .then( session => {
+    res.send(session)
+    console.log("testing session info...", session)
+   })
+  .catch(err => res.send(err) )   
+
+  // The ROOM page uses this to first initiate a document representing the session
+  // later, we need to PUT the current_playlist into this document when a playlist is selected as master (onClick)
   });
 
-//Update a session
+
+
+
+// 2) Update an existing Session when we pick a playlist -- specifically, setting the current_playlist field (placeholder until now) equal to the req.body.playlistID
 app.put('/sessions/:id', (req, res) => {
-  let sessionID = req.params.id;
+  let sessionName = req.params.sessionName; // confused about req.params and req.body here 
 
-  db.Session.findOneAndUpdate({_id: sessionID}, {$set: {current_playlist : req.body.playlistID }}, {new: true})
-            .then( (session) => {
-              res.send(session);
-            }).catch(err) {
-              res.send(err);
-            }
-
+  // find the Session (document) where _id = sessionID (confused per above), then sets the current_playlist on that document equal to req.body.playlistID (where's this coming from again?)
+  db.Session.findOneAndUpdate({sessionName: req.body.sessionName}, {$set: {current_playlist : req.body.playlistID }}, {new: true})
+            .then( (session) => res.send(session) )
+            .catch(err => res.send(err) ) 
 })
 
-// Add a playlist to collection when we select our active Playlist (onClick)
-// ADMIN uses this
-app.post('/playlist', (req, res, next) => {
+
+
+
+// 3) Create a playlist document when we select our active Playlist (will use this onClick of Playlist)
+app.post('/playlist', (req, res) => {
 
 var playlistData = {
   name: req.body.playlist.name,
@@ -50,29 +61,27 @@ var playlistData = {
   songs: []
 
 };
-
-dbase.Playlist.create(playlistData).then( playlist ) => {
-  res.send({
-    message: "playlist created succesfully",
-    playlist: playlist
-  });
-};
-
+// the ROOM page uses this to create a Playlist collection when we select a playlist as active (onClick)
+dbase.Playlist.create(playlistData)
+  .then( playlist  => {
+    res.send({
+      message: "playlist created succesfully",
+      playlist: playlist
+    })
+  })
 });
 
 
-//Update a session
+
+// Update a Session and set songs (previously a placeholder) to req.body.songs
 app.put('/playlists/:id/', (req, res) => {
   let playlistID = req.params.id;
 
+  // then respond with the data
   db.Session.findOneAndUpdate({_id: playlistID}, {$set: {songs: req.body.songs }}, {new: true})
-            .then( (session) => {
-              res.send(session);
-            }).catch(err) {
-              res.send(err);
-            }
-
-})
+  .then( (session) => res.send(session) )
+  .catch(err => res.send(err) ) 
+});
 
 // Get all songs from a playlist (GET)
 // USER uses this
@@ -82,8 +91,8 @@ app.get('/playlists/:id', (req, res) => {
 
 
 
-
 app.use(express.static("./client/public"));
+
 
 server = app.listen(3001, function() {
   console.log("server is running on port: " + PORT);

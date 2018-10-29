@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Row from "../../Components/Row";
+import PlaylistChoices from "../../Components/PlaylistChoices"
 import SongChoices from "../../Components/SongChoices";
 import Container from "../../Components/Container";
 import Spotify from "spotify-web-api-js";
@@ -8,7 +9,6 @@ import NowPlaying from "../../Components/NowPlaying";
 import Button from "../../Components/Button";
 import axios from "axios";
 
-// import API from "../../Utils"
 
 const spotifyWebApi = new Spotify();
 
@@ -18,9 +18,11 @@ class Room extends Component {
     const params = this.getHashParams();
     this.state = {
       loggedIn: params.access_token ? true : false,
+      sessionName: '',
 
       userPlaylists: [],
-      activePlaylist: [],
+      activePlaylist: '05V9ZNCIMJfDhmYY6KhfUu',
+      activePlaylistTracks: [],
       voteOptions: [],
 
       nowPlaying: {
@@ -32,13 +34,15 @@ class Room extends Component {
         spotify_id: '',
         db_id: ''
       },
-
-      sessionID: ''
     };
 
     if (params.access_token) {
       spotifyWebApi.setAccessToken(params.access_token);
     }
+  }
+
+  checkState() {
+    console.log(this.state)
   }
 
   getHashParams() {
@@ -52,17 +56,21 @@ class Room extends Component {
     return hashParams;
   }
 
+  // Function to query the API and return currently-playing data for authenticated user
   getNowPlaying() {
     spotifyWebApi.getMyCurrentPlaybackState().then(response => {
+      console.log("Now playing: ", response)
       this.setState({
         nowPlaying: {
           name: response.item.name,
+          artist: response.item.artists[0].name,
           image: response.item.album.images[0].url
         }
       });
     });
   }
 
+  // Function to query the API and return playlists data for authenticated user
   getUserPlaylists() {
     spotifyWebApi.getUserPlaylists().then(response => {
       this.setState({
@@ -71,6 +79,7 @@ class Room extends Component {
         //   spotify_id : response.spotify_id //this may not exactly be coming from the response or be the right name
         // }
       });
+      console.log("Playlists returned: ", response)
 
       //TODO: in this function we are gonna set the state of state.
       // console.log("SET TO STATE: ",this.setState.userPlaylists);
@@ -78,7 +87,19 @@ class Room extends Component {
     console.log(this.state)
   }
 
+  // Function to query the Spotify API and return the tracks for a given playlist ID (activePlaylist // currently hardCoded due to DB issues)
+  getPlaylistTracks() {
+    var activePlaylist = this.state.activePlaylist;
+    var spotify_id = this.state.spotify_id;
+    spotifyWebApi.getPlaylistTracks(spotify_id, activePlaylist).then(response => {
+      this.setState({
+        activePlaylistTracks: response.items
+      })
+      console.log("Tracks returned: ", response)
+    })
+  }
 
+  // Function to set the spotify_id (returned from authentication) to the active state as a property of user
   setActiveUser() {
     // Get the authenticated user
       spotifyWebApi.getMe().then(response => {
@@ -91,40 +112,48 @@ class Room extends Component {
         console.log('Something went wrong!', err);
       });
   }
-  // USE THE ID ON THE MAPPED SONGCHOICES... WHEN ONE IS CLICKED, GET ITS SONGS
-  // getPlaylistSongs(id) {
 
-  //     .then((response) => {
-  //         this.setState({
-  //             chosenPlaylistSongs: response.items
-  //         })
-  //     })
-  // }
+  // Function to query the Spotify API for tracks when a playlist is clicked
+    // then use that id to query the tracks on the playlist
+     // THEN 
+  setActivePlaylistDetails() {
+    var activePlaylist = this.state.activePlaylist;
+    const spotify_id = this.state.spotify_id;
 
-  setActivePlaylist() {
-    console.log("Clicked on playlist");
-    // using playlist ID, get songs, pick a random song, start playback
-    // AND populate 5 random options into middle container as voting divs
+    console.log("Clicked on playlist")
+    // WRITE CODE TO START THIS PLAYLIST PLAYBACK (RANDOM?)
+    
+    // spotifyWebApi.play(activePlaylist).then(
 
+    spotifyWebApi.getPlaylistTracks(spotify_id, activePlaylist).then(response => {
+      this.setState({
+        activePlaylistTracks: response.items
+      })
+      console.log("Tracks returned: ", response)
+    })
+    // .then() WRITE CODE FOR RANDOMLY PICKING 5 and SETTING TO VOTE OPTIONS ***
   }
-   //call this on a button click and attach an input field for the session name to it
-   //sessionInfo is coming from the form
-   createNewSession() {
-       return axios.post('/session', {
-         spotify_id: this.state.user.spotify_id,
-         name: this.state.sessionName,
-         current_playlist_id : "" 
-       }).then( (response, err) => {
-         if (err)
-            console.log(err)
-         else {
-           this.state.sessionID = response.sessionID;
-           //this.getUserPlaylists();
-         }
-       })
-   }
 
-// Mongo struggles starting here
+  
+   // Function to run POST request and create a Session (in MongoDB)
+   createNewSession() {
+    return axios.post('/session', {
+      spotify_id: this.state.user.spotify_id,
+      sessionName: this.state.sessionName,
+      current_playlist_id : "" 
+    })
+    .then( res => {
+     //  if (err) {
+     //     console.log(err)
+     //  } else {
+        // this.setState({
+        //   sessionName : response.sessionName
+        // })
+        console.log("response from POSTING new Session: ", res)
+        //this.getUserPlaylists();
+     //  }
+    }).catch(err => console.log("from room.js...", err)) //FIRING AHHHHHH
+}
 
   componentDidMount() {
     this.getUserPlaylists();
@@ -133,28 +162,20 @@ class Room extends Component {
     // this.loadRoomHistory(); *** DB
   }
 
-  // loadRoomHistory = (id) => {
-  //   API.getUser(spotify_id)
-    // if spotify_id and access_token = true
-    // then get "rooms" array from user document where spotify_id = this.state.spotify_id
-  
-
-
-
   render() {
     return (
       <div>
       
-
         <NowPlaying
           name={this.state.nowPlaying.name}
+          artist={this.state.nowPlaying.artist}
           src={this.state.nowPlaying.image}
           style={{ width: 50 }}
         />
 
-          <Button onClick={() => this.getUserPlaylists() + this.setActiveUser()} className="api-check-btn">
+          {/* <Button onClick={() => this.createNewSession() + this.getUserPlaylists() + this.setActiveUser()} className="api-check-btn">
           Check My Music
-        </Button>
+        </Button> */}
 
         <Container
           className="body-container"
@@ -166,26 +187,27 @@ class Room extends Component {
               {this.state.userPlaylists.map(playlist => {
                 return (
                   
-                  <SongChoices
+                  <PlaylistChoices onClick={() => this.setActivePlaylistDetails() + this.createNewSession() + this.checkState()}
+
                     key={playlist.id}
                     name={playlist.name}
-                    setActive={this.setActivePlaylist}
+                    setActive={this.setActivePlaylistDetails}
                     id={playlist.id}
-                    onClick={this.getPlaylistSongs}
+                    // onClick={this.getPlaylistSongs}
                     // image = {playlist.images[2].url}
                   />
                 );
               })}
             </OptionsPanel>
 
-            <OptionsPanel size="md-12" name="VOTE FOR THE NEXT SONG">
-              {this.state.activePlaylist.map(song => {
+            <OptionsPanel size="md-12" name="Vote Options for Next Song">
+              {this.state.activePlaylistTracks.map(track => {
                 return (
                   <SongChoices
-                    key={song.id}
-                    name={song.name}
-                    id={song.id}
-                    image={song.images[2].url}
+                    key={track.track.id}
+                    name={track.track.name}
+                    artist={track.track.artists[0].name}
+                    id={track.id}
                   />
                 );
               })}

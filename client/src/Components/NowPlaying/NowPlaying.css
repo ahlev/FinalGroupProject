@@ -1,4 +1,10 @@
 .now-playing {
     margin-top: 50px;
     /* margin-bottom: -20p */
+    font-size: 15px !important;
+  
+}
+
+h6 {
+    font-weight: 600 !important;
 }

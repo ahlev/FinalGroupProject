@@ -39,9 +39,9 @@ class HomePage extends Component {
                   </Button>
                   <h5>Create a room in seconds</h5>
                   <ul>
-                    <li>#1) Pick a room name + a Spotify playlist</li>
-                    <li>#2) Share a unique link with friends or customers</li>
-                    <li>#3) Let the people vote and bask in social music</li>
+                    <li>#1) Login with your Spotify account</li>
+                    <li>#2) Name your room and choose a master playlist</li>
+                    <li>#3) Share your room & let the people vote on the next song</li>
                   </ul>
                 </div>
               </Col>
@@ -65,7 +65,7 @@ class HomePage extends Component {
             </Row>
 
             <Row>
-              <Modal open={open} onClose={this.onCloseModal} center>
+              <Modal open={open} onClose={this.onInputChange} center>
                 {/* Try to make this a component. It uses react-responsive-modal */}
                 <br />
                 <h5>Create your room</h5>
@@ -76,12 +76,13 @@ class HomePage extends Component {
                   {/* *** this form should be component*/}
                   <div className="form-group">
                     <input
+                      // onChange={this.handleInputChange}
                       type="text"
                       className="form-control"
                       id="room-name"
                       aria-describedby="room-name"
                       placeholder="Name your room"
-                      required
+                      // required
                     />
                   </div>
                   <br />

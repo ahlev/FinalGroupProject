@@ -1,12 +1,12 @@
-.songChoice {
+.playlistChoice {
     /* background-color: green !important; */
-    height: 10%;
+    height: 90px;
     margin-top: 10px !important;
     width: 80%;
     padding: 20px;
     font-size: 20px;
     align-items: center;
-    border-radius: 2px;
+    border-radius: 8px;
     transition: 100ms ease-in-out;
     font-family: 'Quicksand', sans-serif;
     font-weight: bolder;
@@ -19,7 +19,7 @@
 
 
 
-.songChoice:hover {
+.playlistChoice:hover {
     transform: scale(1.06) ;
 
     background-image: linear-gradient(to bottom right, hsl(194, 100%, 75%), 
@@ -27,10 +27,9 @@
 
     }
 
-.songChoice:focus {
-    background-image: linear-gradient(to bottom right, #43f815, hsl(148, 98%, 25%)) !important; 
-    /* box-shadow: 0 3px 0 #000000; */
+.playlistChoice:focus {
     top: 3px;
     bottom: 3px;
+    background-image: linear-gradient(to top right, rgb(248, 202, 75), hsl(93, 97%, 42%)) !important;
 
 }

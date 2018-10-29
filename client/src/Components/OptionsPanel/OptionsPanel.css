@@ -4,6 +4,6 @@
 
 .options-panel {
     border: solid 2px black;
-    height: 50vh;
+    height: 60vh;
     overflow: scroll;
 }
