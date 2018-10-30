@@ -12,11 +12,10 @@
     font-weight: bolder;
     margin: 0 auto;
     
-    background-image: linear-gradient(to bottom right, #43f815, #0c94ca);
+    background-image: linear-gradient(to bottom right, rgb(2, 200, 101), #059e1f) !important;
     filter: drop-shadow(00px 5px 8px #333);
     margin: 8px;
 }
-
 
 
 .playlistChoice:hover {
@@ -28,6 +27,13 @@
     }
 
 .playlistChoice:focus {
+    top: 3px;
+    bottom: 3px;
+    background-image: linear-gradient(to top right, hsl(101, 100%, 75%), rgb(69, 153, 0)) !important;
+
+}
+
+.playlistChoice:active {
     top: 3px;
     bottom: 3px;
     background-image: linear-gradient(to top right, rgb(248, 202, 75), hsl(93, 97%, 42%)) !important;

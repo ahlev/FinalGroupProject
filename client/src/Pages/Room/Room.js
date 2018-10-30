@@ -7,22 +7,30 @@ import Spotify from "spotify-web-api-js";
 import OptionsPanel from "../../Components/OptionsPanel";
 import NowPlaying from "../../Components/NowPlaying";
 import Button from "../../Components/Button";
+import Modal from 'react-responsive-modal';
 import axios from "axios";
+import "./Room.css";
 
+
+var shuffledTracks = [];
+var voteOptions = [];
 
 const spotifyWebApi = new Spotify();
 
 class Room extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const params = this.getHashParams();
     this.state = {
       loggedIn: params.access_token ? true : false,
       sessionName: '',
 
+      open: true,
+
       userPlaylists: [],
       activePlaylist: '05V9ZNCIMJfDhmYY6KhfUu',
       activePlaylistTracks: [],
+      shuffledPlaylistTracks: [],
       voteOptions: [],
 
       nowPlaying: {
@@ -39,11 +47,36 @@ class Room extends Component {
     if (params.access_token) {
       spotifyWebApi.setAccessToken(params.access_token);
     }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+
+
+  handleChange(event) {
+    this.setState({sessionName: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.sessionName);
+    // event.preventDefault();
+  }
+
+
+
 
   checkState() {
     console.log(this.state)
   }
+
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
 
   getHashParams() {
     var hashParams = {};
@@ -59,6 +92,7 @@ class Room extends Component {
   // Function to query the API and return currently-playing data for authenticated user
   getNowPlaying() {
     spotifyWebApi.getMyCurrentPlaybackState().then(response => {
+      console.log("NOW PLAYING DATA: " , response)
       console.log("Now playing: ", response)
       this.setState({
         nowPlaying: {
@@ -67,12 +101,14 @@ class Room extends Component {
           image: response.item.album.images[0].url
         }
       });
-    });
+      
+    })
   }
 
   // Function to query the API and return playlists data for authenticated user
   getUserPlaylists() {
     spotifyWebApi.getUserPlaylists().then(response => {
+     
       this.setState({
         userPlaylists: response.items
         // user: {
@@ -80,22 +116,24 @@ class Room extends Component {
         // }
       });
       console.log("Playlists returned: ", response)
-
       //TODO: in this function we are gonna set the state of state.
       // console.log("SET TO STATE: ",this.setState.userPlaylists);
     });
-    console.log(this.state)
+ 
   }
+
+
 
   // Function to query the Spotify API and return the tracks for a given playlist ID (activePlaylist // currently hardCoded due to DB issues)
   getPlaylistTracks() {
     var activePlaylist = this.state.activePlaylist;
     var spotify_id = this.state.spotify_id;
     spotifyWebApi.getPlaylistTracks(spotify_id, activePlaylist).then(response => {
+      let songChoices = response.items; // *****
       this.setState({
-        activePlaylistTracks: response.items
+        activePlaylistTracks: response.items,
       })
-      console.log("Tracks returned: ", response)
+   
     })
   }
 
@@ -126,15 +164,15 @@ class Room extends Component {
     // spotifyWebApi.play(activePlaylist).then(
 
     spotifyWebApi.getPlaylistTracks(spotify_id, activePlaylist).then(response => {
+      
       this.setState({
         activePlaylistTracks: response.items
       })
       console.log("Tracks returned: ", response)
     })
-    // .then() WRITE CODE FOR RANDOMLY PICKING 5 and SETTING TO VOTE OPTIONS ***
   }
 
-  
+
    // Function to run POST request and create a Session (in MongoDB)
    createNewSession() {
     return axios.post('/session', {
@@ -155,6 +193,7 @@ class Room extends Component {
     }).catch(err => console.log("from room.js...", err)) //FIRING AHHHHHH
 }
 
+
   componentDidMount() {
     this.getUserPlaylists();
     this.setActiveUser();
@@ -163,9 +202,11 @@ class Room extends Component {
   }
 
   render() {
+    const { open } = this.state;
+
     return (
       <div>
-      
+      <h4 className="sessionName">Current Room:<br /> {this.state.sessionName}</h4>
         <NowPlaying
           name={this.state.nowPlaying.name}
           artist={this.state.nowPlaying.artist}
@@ -177,10 +218,9 @@ class Room extends Component {
           Check My Music
         </Button> */}
 
-        <Container
-          className="body-container"
-          fluid="true"
-          style={{ marginTop: 20 }}
+        <Container fluid="false"
+        className="body-container"
+        style={{ marginTop: 20 }}
         >
           <Row>
             <OptionsPanel size="md-12" name="Pick Your Master Playlist">
@@ -212,9 +252,33 @@ class Room extends Component {
                 );
               })}
             </OptionsPanel>
-
-          
           </Row>
+          <Row>
+          <Modal open={open} onClose={this.onCloseModal} center>
+           <br />
+                <h7 className="currentRoom">Create your room</h7>
+                <form className="mainForm">
+                  <div className="logo-transparent" />
+
+                  <p className="form-brand-name">SoundUp</p>
+                  {/* *** this form should be component*/}
+                  <div className="form-group">
+                    <input
+                      value={this.state.value} 
+                      onChange={this.handleChange}
+                      type="text"
+                      className="form-control"
+                      id="room-name"
+                      aria-describedby="room-name"
+                      placeholder="Name your room"
+                      // required
+                    />
+                  </div>
+                  <br />
+                </form>
+            <button  onClick={() => this.onCloseModal()}>Rock on</button>
+        </Modal>
+            </Row> 
         </Container>
       </div>
     );

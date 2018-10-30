@@ -78,9 +78,10 @@ h1 {
 }
 
 .row {
-  margin-left: +15px;
-  margin-right: +15px;
-  margin-bottom: 20px;
+  margin: 30px 60px;
+  /* margin-left: +15px;
+  margin-right: +15px; */
+  /* margin-bottom: 20px; */
   font-family: "Quicksand", sans-serif;
   margin-bottom: 50px;
   /* font-family: 'Arvo', serif; */
@@ -143,4 +144,8 @@ h1 {
 
 .api-check-btn {
   margin-bottom: -50px;
+}
+
+h7 {
+  margin-top: -30px;
 }

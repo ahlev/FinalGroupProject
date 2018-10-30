@@ -34,9 +34,11 @@ class HomePage extends Component {
             <Row>
               <Col size="md-5">
                 <div className="action-panel">
+                <a href="http://localhost:8888">
                   <Button onClick={this.onOpenModal} center>
                     Launch a room
                   </Button>
+                  </a>
                   <h5>Create a room in seconds</h5>
                   <ul>
                     <li>#1) Login with your Spotify account</li>
@@ -46,7 +48,7 @@ class HomePage extends Component {
                 </div>
               </Col>
 
-              <Col size="md-1" />
+              <Col size="md-1"></Col>
 
               <Col size="md-6">
                 <div className="info-panel">
@@ -62,38 +64,6 @@ class HomePage extends Component {
                   </p>
                 </div>
               </Col>
-            </Row>
-
-            <Row>
-              <Modal open={open} onClose={this.onInputChange} center>
-                {/* Try to make this a component. It uses react-responsive-modal */}
-                <br />
-                <h5>Create your room</h5>
-                <form className="mainForm">
-                  <div className="logo-transparent" />
-
-                  <p className="form-brand-name">SoundUp</p>
-                  {/* *** this form should be component*/}
-                  <div className="form-group">
-                    <input
-                      // onChange={this.handleInputChange}
-                      type="text"
-                      className="form-control"
-                      id="room-name"
-                      aria-describedby="room-name"
-                      placeholder="Name your room"
-                      // required
-                    />
-                  </div>
-                  <br />
-                </form>
-
-                {/* This a href is being used in dev mode to redirect to the auth-server for Spotify login *** */}
-                {/* Basically, it redirects to that other app (server) and then should bounce back to the react app with an access key */}
-                <a href="http://localhost:8888">
-                  <Button>Start with Spotify</Button>
-                </a>
-              </Modal>
             </Row>
           </Container>
         </div>

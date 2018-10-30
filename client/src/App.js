@@ -29,6 +29,7 @@ class App extends Component {
     // console.log(this.state.sessionName)
   }
   
+  
 
   // handleInputChange = (event) => {
   //   // Using object destructuring to create two variables (off of our event), then set the state dynamically based on those values
