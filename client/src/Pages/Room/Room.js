@@ -52,8 +52,6 @@ class Room extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-
   handleChange(event) {
     this.setState({sessionName: event.target.value});
   }
@@ -62,9 +60,6 @@ class Room extends Component {
     alert('A name was submitted: ' + this.state.sessionName);
     // event.preventDefault();
   }
-
-
-
 
   checkState() {
     console.log(this.state)
@@ -77,6 +72,7 @@ class Room extends Component {
   onCloseModal = () => {
     this.setState({ open: false });
   };
+  
 
   getHashParams() {
     var hashParams = {};
@@ -94,6 +90,7 @@ class Room extends Component {
     spotifyWebApi.getMyCurrentPlaybackState().then(response => {
       console.log("NOW PLAYING DATA: " , response)
       console.log("Now playing: ", response)
+      if( this.state.nowPlaying )
       this.setState({
         nowPlaying: {
           name: response.item.name,
@@ -151,28 +148,46 @@ class Room extends Component {
       });
   }
 
+  
+getRandom = (arr, n) => {
+    var voteOptions = new Array(n),
+        len = arr.length,
+        taken = new Array(len);
+    if (n > len)
+        throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+        var x = Math.floor(Math.random() * len);
+        voteOptions[n] = arr[x in taken ? taken[x] : x];
+        taken[x] = --len in taken ? taken[len] : len;
+    }
+    // return result;
+    
+    this.setState({voteOptions: voteOptions})
+    console.log("randomized songs!", voteOptions)
+}
+
   // Function to query the Spotify API for tracks when a playlist is clicked
     // then use that id to query the tracks on the playlist
      // THEN 
   setActivePlaylistDetails() {
     var activePlaylist = this.state.activePlaylist;
     const spotify_id = this.state.spotify_id;
-
+    var activePlaylistTracks = this.state.activePlaylistTracks
     console.log("Clicked on playlist")
     // WRITE CODE TO START THIS PLAYLIST PLAYBACK (RANDOM?)
     
     // spotifyWebApi.play(activePlaylist).then(
 
     spotifyWebApi.getPlaylistTracks(spotify_id, activePlaylist).then(response => {
-      
       this.setState({
         activePlaylistTracks: response.items
       })
       console.log("Tracks returned: ", response)
+      // .then(getRandom(this.state.activePlaylistTracks, 3000))
     })
   }
 
-
+  
    // Function to run POST request and create a Session (in MongoDB)
    createNewSession() {
     return axios.post('/session', {
@@ -192,6 +207,7 @@ class Room extends Component {
      //  }
     }).catch(err => console.log("from room.js...", err)) //FIRING AHHHHHH
 }
+
 
 
   componentDidMount() {
@@ -217,7 +233,9 @@ class Room extends Component {
           {/* <Button onClick={() => this.createNewSession() + this.getUserPlaylists() + this.setActiveUser()} className="api-check-btn">
           Check My Music
         </Button> */}
-
+        <button className="createSession" onClick={() => this.getRandom(this.state.activePlaylistTracks, 6) + this.createNewSession()}>
+        Launch your room to let the people vote!</button>
+        <p className="instructions">Choose your playlist, then click above to generate your shareable URL</p>
         <Container fluid="false"
         className="body-container"
         style={{ marginTop: 20 }}
@@ -227,7 +245,7 @@ class Room extends Component {
               {this.state.userPlaylists.map(playlist => {
                 return (
                   
-                  <PlaylistChoices onClick={() => this.setActivePlaylistDetails() + this.createNewSession() + this.checkState()}
+                  <PlaylistChoices onClick={() => this.setActivePlaylistDetails()  + this.checkState() }
 
                     key={playlist.id}
                     name={playlist.name}
@@ -241,7 +259,7 @@ class Room extends Component {
             </OptionsPanel>
 
             <OptionsPanel size="md-12" name="Vote Options for Next Song">
-              {this.state.activePlaylistTracks.map(track => {
+              {this.state.voteOptions.map(track => {
                 return (
                   <SongChoices
                     key={track.track.id}
@@ -256,7 +274,7 @@ class Room extends Component {
           <Row>
           <Modal open={open} onClose={this.onCloseModal} center>
            <br />
-                <h7 className="currentRoom">Create your room</h7>
+                <h7 className="currentRoom">Name your room</h7>
                 <form className="mainForm">
                   <div className="logo-transparent" />
 
@@ -271,12 +289,17 @@ class Room extends Component {
                       id="room-name"
                       aria-describedby="room-name"
                       placeholder="Name your room"
+                      required
                       // required
                     />
                   </div>
                   <br />
+                
+
                 </form>
-            <button  onClick={() => this.onCloseModal()}>Rock on</button>
+                <button  
+                  onClick={() => this.onCloseModal()}
+                  >Rock on</button>
         </Modal>
             </Row> 
         </Container>
