@@ -13,7 +13,7 @@ const MainJumbotron = props => {
         <p className="intro-title">
           Your playlist. Your people. Your{" "}
           <TextLoop
-            springConfig={{ stiffness: 300, damping: 10, speed: 300 }}
+            springConfig={{ stiffness: 300, damping: 10, speed: 170 }}
             // speed= 1000ms;
             children={["party", "hangout", "restaurant", "business", "event"]}
           />

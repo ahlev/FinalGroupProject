@@ -148,6 +148,13 @@ class Room extends Component {
       });
   }
 
+// generateRoomUrl = () => {
+//   roomURL = "https://localhost:3000/" + this.state.spotify_id + "/" + this.state.activePlaylist + "/";
+//   this.setState({
+//     roomURL: roomURL
+//   })
+// }
+
   
 getRandom = (arr, n) => {
     var voteOptions = new Array(n),
@@ -213,7 +220,8 @@ getRandom = (arr, n) => {
   componentDidMount() {
     this.getUserPlaylists();
     this.setActiveUser();
-    this.getNowPlaying();
+    this.getNowPlaying()
+
     // this.loadRoomHistory(); *** DB
   }
 
