@@ -22,7 +22,7 @@
 .songChoice:hover {
     transform: scale(1.06) ;
 
-    background-image: linear-gradient(to bottom right, rgb(0, 96, 175), hsl(212, 93%, 48%));
+    /* background-image: linear-gradient(to bottom right, rgb(0, 96, 175), hsl(212, 93%, 48%)); */
 
     }
 

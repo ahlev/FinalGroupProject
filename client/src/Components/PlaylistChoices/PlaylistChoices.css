@@ -29,7 +29,7 @@
 .playlistChoice:focus {
     top: 3px;
     bottom: 3px;
-    background-image: linear-gradient(to top right, hsl(101, 100%, 75%), rgb(69, 153, 0)) !important;
+    background-image: linear-gradient(to bottom right, rgb(119, 207, 79), #59c401) !important;
 
 }
 

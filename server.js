@@ -3,7 +3,8 @@ const app = express();
 var bodyParser = require("body-parser");
 var socket = require("socket.io");
 var mongoose = require("mongoose")
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 3001;
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
@@ -37,6 +38,28 @@ app.post('/session', (req, res) => {
   });
 
 
+  shuffleSongs = (array) => {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  }
+  
+  // Used like so
+  var arr = ["cat", "dog", "fish", "owl", "whale"];
+  arr = shuffle(arr);
+  console.log(arr);
 
 
 // 2) Update an existing Session when we pick a playlist -- specifically, setting the current_playlist field (placeholder until now) equal to the req.body.playlistID
