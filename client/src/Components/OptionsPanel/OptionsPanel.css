@@ -3,7 +3,26 @@
 }
 
 .options-panel {
-    border: solid 2px black;
+    border: solid 1px #b4b4b4;
     height: 60vh;
     overflow: scroll;
+    background-color:  white;
+    /* filter: (0px 22px 24px #333); */
+    filter: drop-shadow(3px 5px 8px #333);
+
+}
+
+/* Track */
+-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }

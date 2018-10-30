@@ -1,7 +1,7 @@
 .navbar {
   background-image: linear-gradient(
     to bottom right,
-    #db6300,
+    hsl(27, 100%, 60%),
     rgb(244, 255, 50)
   );
   /* background-image: linear-gradient(to bottom right, rgb(244, 255, 50), #db6300); */
@@ -9,11 +9,11 @@
   /* background-image: linear-gradient(to bottom right, hsl(192, 100%, 50%), rgb(2, 52, 145)); */
 
   font-size: 16px;
-  font-weight: bolder;
+  font-weight: 800 !important;
   color: white !important;
-  height: 28px;
+  height: 32px;
   font-family: "Quicksand", sans-serif;
-  filter: drop-shadow(0px 1px 2px rgb(0, 0, 0));
+  filter: drop-shadow(0px 1px 4px rgb(0, 0, 0));
   position: fixed;
   top: 0;
   width: 100%;
@@ -21,14 +21,14 @@
 
 brand-logo {
   font-size: 20px !important;
-  font-weight: bolder;
+  font-weight: 800;
   color: yellow;
   color: white !important;
 }
 
 .navbar-brand {
   font-size: 20px;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   color: black !important;
 }
 

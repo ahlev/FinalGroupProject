@@ -7,9 +7,7 @@ const NowPlaying = props => {
   return (
     <div className="now-playing">
       <h6>
-       Currently Playing:
-        <br />
-        {props.name} by {props.artist}
+       Playing Now: {props.name} by {props.artist}
       </h6>
       <img src={props.src} style={{ width: 150 }} />
     </div>
