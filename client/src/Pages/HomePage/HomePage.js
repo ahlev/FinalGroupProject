@@ -34,7 +34,7 @@ class HomePage extends Component {
             <Row>
               <Col size="md-5">
                 <div className="action-panel">
-                <a href="http://localhost:8888">
+                <a href="https://salty-chamber-18605.herokuapp.com/login">
                   <Button onClick={this.onOpenModal} center>
                     Launch a room
                   </Button>
