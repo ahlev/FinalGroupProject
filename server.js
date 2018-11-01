@@ -13,6 +13,11 @@ var dbase = require('./models');
 // Connect to the Mongo DB
 mongoose.connect(MONGODB_URI);
 
+if(process.env.NODE_ENV === "production") 
+  app.use(express.static("./client/build/"));
+else 
+  app.use(express.static("./client/public/"));
+
 
 // =============================== ROUTES ======================================
 // app.get('*', middleware);
