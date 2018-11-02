@@ -1,0 +1,37 @@
+.sessionName {
+    margin-top: 50px;
+}
+
+.createSession {
+    width: 600px !important;
+    color: green;
+    margin-top: 15px;
+    padding: 5px;
+    /* margin-bottom: -px; */
+}
+
+.createSession:active {
+    width: 600px !important;
+    color: #f6f6f6;
+    margin-top: 15px;
+    background-color: #6fc86f;
+    /* margin-bottom: -px; */
+}
+
+.createSession:focus {
+    width: 600px !important;
+    color: green;
+    margin-top: 15px;
+    background-color: hsl(0, 0%, 90%);
+    /* margin-bottom: -px; */
+}
+
+p {
+    font-size: 8px;
+}
+
+.instructions {
+    font-size: 18px !important;
+    margin-top: -1px;
+    font-weight: 600 !important;
+}
