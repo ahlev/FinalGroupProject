@@ -7,10 +7,10 @@
 ## Steps to access run the application locally:
 1) Clone or download a local copy of the repository
 2) In the root run "npm i"
-3) ... cd into client, run "npm i"
+3) ... cd into client & run "npm i"
 4) ... cd back to the root
-5) ... cd into authoritzation-server/authorization_code, run "npm i"
-6) ... run "nodemon app.js" (or "node app.js")
+5) ... cd into authoritzation-server/authorization_code & run "npm i"
+6) ... run "nodemon app.js"
 7) In a new terminal, navigate to the project's root directory
 8) ... run "npm start" to launch the react application
 
