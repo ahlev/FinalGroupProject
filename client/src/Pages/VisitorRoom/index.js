@@ -1,1 +1,1 @@
-export { default } from "./Room.js";
+export { default } from "./VisitorRoom.js";
