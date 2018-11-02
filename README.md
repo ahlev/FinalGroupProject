@@ -5,14 +5,14 @@
 ## A node-based web application with a React front-end, designed to let people interact with the playlist being played wherever they are. (uses Spotify API)
 
 ## Steps to access run the application locally:
-1) Download a local copy of the repository
-2) In the root directory, run "npm install"
-3) ... cd into client, run "npm install"
+1) Clone or download a local copy of the repository
+2) In the root run "npm i"
+3) ... cd into client, run "npm i"
 4) ... cd back to the root
-5) ... cd into authoritzation-server/authorization_code, 
+5) ... cd into authoritzation-server/authorization_code, run "npm i"
 6) ... run "nodemon app.js" (or "node app.js")
-7) In another terminal, navigate to the project's root directory
-8) ... then run "npm start" to launch the react application
+7) In a new terminal, navigate to the project's root directory
+8) ... run "npm start" to launch the react application
 
 
 
