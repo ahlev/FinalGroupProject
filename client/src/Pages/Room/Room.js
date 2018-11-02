@@ -90,7 +90,7 @@ class Room extends Component {
     spotifyWebApi.getMyCurrentPlaybackState().then(response => {
       console.log("NOW PLAYING DATA: " , response)
       console.log("Now playing: ", response)
-      if( this.state.nowPlaying )
+      if ( response ) {
       this.setState({
         nowPlaying: {
           name: response.item.name,
@@ -98,7 +98,7 @@ class Room extends Component {
           image: response.item.album.images[0].url
         }
       });
-      
+    }
     })
   }
 
@@ -241,9 +241,10 @@ getRandom = (arr, n) => {
           {/* <Button onClick={() => this.createNewSession() + this.getUserPlaylists() + this.setActiveUser()} className="api-check-btn">
           Check My Music
         </Button> */}
+           <p className="instructions">FIRST Choose your playlist, THEN click below to generate your shareable URL</p>
         <button className="createSession" onClick={() => this.getRandom(this.state.activePlaylistTracks, 6) + this.createNewSession()}>
         Launch your room to let the people vote!</button>
-        <p className="instructions">Choose your playlist, then click above to generate your shareable URL</p>
+     
         <Container fluid="false"
         className="body-container"
         style={{ marginTop: 20 }}
