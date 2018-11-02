@@ -9,14 +9,14 @@
 2) In the root directory, run "npm install"
 3) ... cd into client, run "npm install"
 4) ... cd back to the root
-5) ... cd into authoritzation-server, run "npm install"
-6) ... cd into authorization_code and run "nodemon app.js" (or "node app.js")
+5) ... cd into authoritzation-server/authorization_code, 
+6) ... run "nodemon app.js" (or "node app.js")
 7) In another terminal, navigate to the project's root directory
 8) ... then run "npm start" to launch the react application
 
 
 
-### This project features an authorization server stored and hosted separately from our React express server, in an effort to isolate private information and create a more secure environment. Currently this is complicating the process of deployment to Heroku. It necessitates installing node packages in several places (see steps above).
+### This project features an authorization server stored and hosted separately from our React express server, in an effort to isolate private information and create a more secure environment. Currently this is complicating the process of deployment to Heroku.
 - Running nodemon on app.js (in the authorization directory) allows for the authentication redirect on localhost:8888 
 - Running npm start in the root directory launches the React application on localhost:3000
 
@@ -43,10 +43,9 @@
  
 
  
-  
-
 # HomePage 
 ![Alt text](/client/src/images/SoundUp_homepage.gif "Homepage")
+<br />
 
 # Authentication with Spotify API
 ![Alt text](/client/src/images/SoundUp_authentication.gif "Homepage")
