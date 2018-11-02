@@ -23,7 +23,7 @@
 
 -------------
 
-## With SoundUp, venue managers and event hosts can invite guests and visitors shape their playlist by voting for their choice of the next song to play -- adding a new interactive dynamic to parties, venues, festivals and events and elevate the soundtrack wherever people gather. 
+## With SoundUp, venue managers and event hosts can invite guests and visitors shape their playlist by voting for their choice of the next song to play -- adding a new interactive dynamic to parties, venues and events -- even trips in the car with friends. Elevate the soundtrack wherever people gather. 
 
 
 ## Technology
