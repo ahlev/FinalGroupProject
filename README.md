@@ -69,3 +69,7 @@
 ## Vote totals will be read from the database by the Admin and the Spotify API will make a call to queue the winning song to play next (using vote vount and song ID from Session data in database). Six new vote options will be randomized, the database Session document will be updated and then read / rendered by the Visitor view.
 
 ## The cycle repeats, with a new set of randomized options being generated and passed to the Visitor view every time the song changes.
+
+<br /><br />
+# Sample visitor view showing how data will be set by Admin, updated in the database, read and rendered by the Visitor view (on mobile)
+![Alt text](/client/src/images/VisitorView_mobile.png "Homepage")
