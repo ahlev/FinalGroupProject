@@ -39,26 +39,33 @@
 - Spotify-web-api-js (API wrapper)
 - Materialize (UI)
 - dotenv
-
+<br /><br />
  
 
  
 # HomePage 
 ![Alt text](/client/src/images/SoundUp_homepage.gif "Homepage")
-<br />
+<br /><br />
 
 # Authentication with Spotify API
 ![Alt text](/client/src/images/SoundUp_authentication.gif "Homepage")
+<br /><br />
 
 # Admin (Room.js) populates playlists and "now playing"
 ![Alt text](/client/src/images/SoundUp_SpotifyPopulate.gif "Homepage")
+<br /><br />
 
 # Select a Playlist > generate dynamic URL for visitors > randomize 6 vote choices
 ![Alt text](/client/src/images/SoundUp_PickPlaylist_RandomizeVotes.gif "Homepage")
 
 
-## From here, our back-end database routes need significant debugging and building out, but the design is to use a database as the middleman to pass vote options from Admin (Room.js) to Visitor view (VisitorRoom.js). When "Launch your room to let the people vote!" is clicked, a dynamic + shareable URL will be generated and VisitorView.js would render using the Admin settings (Session).
 
-## Visitors to the respective room (Session) will be able to tap a randomized option to vote for a song to play next. Every time a song transition occurs, the database updates to reflect vote totals for each vote option. The Admin connection to the Spotify API will then make a call to queue the winning song to play next (using vote vount and song ID from Session data in database), randomize 6 new vote options, and pass them back to the Visitor view for voting.
+## From here, our back-end database routes need debugging and building out -- we're shifting from trying to use socket.io (instances) to instead using a database to exchange information through (CRUD) unique "Session" documents -- but the design is to use a database as the middleman to pass vote options from the Admin setup (via a Session document) to the Visitor view. 
+
+## When the "Launch your room to let the people vote!" button is clicked by the Admin, a unique URL will be generated (ex. /username/roomname) rendering the Visitor view, populated with the appropriate data (passing vote options, vote counts and "now playing" information through the unique Session document).
+
+## Visitors to this unique URL will be able to tap on their choice of 6 randomized song options (from the Admin's chosen playlist) to vote for a song to play next. Every time a song transition occurs, the database will update to reflect vote totals for each vote option. which will be read by the Admin. 
+
+## Vote totals will be read from the database by the Admin and the Spotify API will make a call to queue the winning song to play next (using vote vount and song ID from Session data in database). Six new vote options will be randomized, the database Session document will be updated and then read / rendered by the Visitor view.
 
 ## The cycle repeats, with a new set of randomized options being generated and passed to the Visitor view every time the song changes.
