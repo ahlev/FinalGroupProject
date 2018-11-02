@@ -72,4 +72,4 @@
 
 <br /><br />
 # Sample visitor view showing how data will be set by Admin, updated in the database, read and rendered by the Visitor view (on mobile)
-![Alt text](/client/src/images/VisitorView_mobile.PNG "Homepage")
+![Alt text](/client/src/images/VisitorView_mobile.png "Homepage")
